@@ -1,0 +1,28 @@
+name: 'Brawo'
+cars:
+- id: 1
+  brand: 'Volvo'
+  model: 'S60'
+  productionYear: 2020
+  carKilometres: 23450
+  price: 67000.0
+  carDetails:
+    horsePower: 200
+    color: 'purple'
+    gearbox: 'Automatic'
+    engineCapacity: 2.0
+    version: 'Momentum'
+    fuelType: 'Petrol'
+- id: 2
+  brand: 'Subaru'
+  model: 'Impreza'
+  productionYear: 2008
+  carKilometres: 478345
+  price: 9832.0
+  carDetails:
+    horsePower: 250
+    color: 'Yellow'
+    gearbox: 'Manual'
+    engineCapacity: 2.5
+    version: 'Sport'
+    fuelType: 'Petrol'
