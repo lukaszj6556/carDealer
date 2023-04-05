@@ -3,33 +3,31 @@ package com.retail.shop.car.model;
 import java.util.List;
 
 public class Dealer {
-   public List<Car> Cars;
-   public String Name;
+    private List<Car> cars;
+    private String name;
 
-public String getName() {
-    return Name;
-}
-
-public void setName(String name) {
-    Name = name;
-}
-
-@Override
-public String toString() {
-    String cars = "";
-    for (Car car : Cars) {
-        cars += car.toString();
+    public String getName() {
+        return name;
     }
-    return "Dealer [Cars=" + cars + ", Name=" + Name + "]";
-}
 
-public List<Car> getCars() {
-    return Cars;
-}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-public void setCars(List<Car> cars) {
-    Cars = cars;
-}
+    @Override
+    public String toString() {
+        String allCars = "";
+        for (Car car : cars) {
+            allCars += car.toString();
+        }
+        return "Dealer [Cars=" + allCars + ", Name=" + name + "]";
+    }
 
+    public List<Car> getCars() {
+        return cars;
+    }
 
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
 }

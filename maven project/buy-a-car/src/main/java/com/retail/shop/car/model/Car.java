@@ -1,29 +1,13 @@
 package com.retail.shop.car.model;
     
 public class Car {
-    public int id;
-    
+    private int id;
     private String brand;
     private String model;
     private int productionYear;
     private long carKilometres;
     private double price;
     private CarDetails carDetails;
-    
-    public Car()
-    {
-
-    }
-    
-    public Car(int id,String brand, String model, int productionYear, long carKilometres, double price)
-    {
-        this.id = id;
-        this.carKilometres = carKilometres;
-        this.brand = brand;
-        this.model = model;
-        this.productionYear = productionYear;
-        this.price = price;
-    }
 
     public int getId() {
         return id;

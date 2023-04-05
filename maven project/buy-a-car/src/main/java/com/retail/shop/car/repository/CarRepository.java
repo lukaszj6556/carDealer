@@ -11,37 +11,46 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.retail.shop.car.model.Car;
 import com.retail.shop.car.model.Dealer;
 
-public class CarRepository{
-
+public class CarRepository implements ICarRepository{
+    private static ICarRepository instance;
     private Dealer data;
 
-    public CarRepository() throws StreamReadException, DatabindException, IOException
+    public static ICarRepository getInstance() throws StreamReadException, DatabindException, IOException {
+        if (instance == null) {
+            instance = new CarRepository();
+        }
+        return instance;
+    }
+
+    private CarRepository() throws StreamReadException, DatabindException, IOException
     {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-
         mapper.findAndRegisterModules();
-
         data = mapper.readValue(new File("src/database.yaml"), Dealer.class);
     }
 
+    @Override
     public List<Car> GetAllCars()
     {
-        return data.Cars;
+        return data.getCars();
     }
 
+    @Override
     public Car GetCarById(int id)
     {
-        return data.Cars.stream().filter(car -> car.id == id).findAny().get();
+        return data.getCars().stream().filter(car -> car.getId() == id).findAny().get();
     }
 
+    @Override
     public void AddCar(Car car)
     {
-        data.Cars.add(car);
+        data.getCars().add(car);
     }
 
+    @Override
     public void Remove(int id)
     {
-        Car carToRemove = data.Cars.stream().filter(car -> car.id == id).findAny().get();
-        data.Cars.remove(carToRemove);
+        Car carToRemove = data.getCars().stream().filter(car -> car.getId() == id).findAny().get();
+        data.getCars().remove(carToRemove);
     }
 }
