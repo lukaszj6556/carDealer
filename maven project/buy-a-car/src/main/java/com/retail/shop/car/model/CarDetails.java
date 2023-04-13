@@ -4,85 +4,69 @@ import com.retail.shop.car.constants.FuelTypeEnum;
 import com.retail.shop.car.constants.GearBoxEnum;
 
 public class CarDetails {
-    public int HorsePower;
-    public String Color;
-    public GearBoxEnum Gearbox;
-    public double EngineCapacity;
-    public String Version;
-    public FuelTypeEnum FuelType;
+    private int horsePower;
+    private String color;
+    private GearBoxEnum gearbox;
+    private double engineCapacity;
+    private String version;
+    private FuelTypeEnum fuelType;
 
-    public CarDetails()
-    {
-        
+    public int getHorsePower() {
+        return horsePower;
     }
 
-   public CarDetails(String color, String version, int horsePower, double engineCapacity, GearBoxEnum gearbox, FuelTypeEnum fuelType)
-   {
-       FuelType = fuelType;
-       Color = color;
-       Version = version;
-       HorsePower = horsePower;
-       EngineCapacity = engineCapacity;
-       Gearbox = gearbox;
-   }
+    public void setHorsePower(int horsePower) {
+        this.horsePower = horsePower;
+    }
 
-public int getHorsePower() {
-    return HorsePower;
-}
+    public String getColor() {
+        return color;
+    }
 
-public void setHorsePower(int horsePower) {
-    HorsePower = horsePower;
-}
+    public void setColor(String color) {
+        this.color = color;
+    }
 
-public String getColor() {
-    return Color;
-}
+    public GearBoxEnum getGearbox() {
+        return gearbox;
+    }
 
-public void setColor(String color) {
-    Color = color;
-}
+    public void setGearbox(GearBoxEnum gearbox) {
+        this.gearbox = gearbox;
+    }
 
-public GearBoxEnum getGearbox() {
-    return Gearbox;
-}
+    public double getEngineCapacity() {
+        return engineCapacity;
+    }
 
-public void setGearbox(GearBoxEnum gearbox) {
-    Gearbox = gearbox;
-}
+    public void setEngineCapacity(double engineCapacity) {
+        this.engineCapacity = engineCapacity;
+    }
 
-public double getEngineCapacity() {
-    return EngineCapacity;
-}
+    public String getVersion() {
+        return version;
+    }
 
-public void setEngineCapacity(double engineCapacity) {
-    EngineCapacity = engineCapacity;
-}
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
-public String getVersion() {
-    return Version;
-}
+    public FuelTypeEnum getFuelType() {
+        return fuelType;
+    }
 
-public void setVersion(String version) {
-    Version = version;
-}
+    public void setFuelType(FuelTypeEnum fuelType) {
+        this.fuelType = fuelType;
+    }
 
-public FuelTypeEnum getFuelType() {
-    return FuelType;
-}
-
-public void setFuelType(FuelTypeEnum fuelType) {
-    FuelType = fuelType;
-}
-
-@Override
-public String toString() {
-    return "CarDetails [HorsePower=" 
-    + HorsePower + ", Color=" 
-    + Color + ", Gearbox=" 
-    + Gearbox + ", EngineCapacity="
-    + EngineCapacity + ", Version=" 
-    + Version + ", FuelType=" 
-    + FuelType + "]";
-}
-
+    @Override
+    public String toString() {
+        return "CarDetails [HorsePower=" 
+        + horsePower + ", Color=" 
+        + color + ", Gearbox=" 
+        + gearbox + ", EngineCapacity="
+        + engineCapacity + ", Version=" 
+        + version + ", FuelType=" 
+        + fuelType + "]";
+    }
 }
