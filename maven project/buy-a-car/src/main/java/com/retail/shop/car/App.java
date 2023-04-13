@@ -10,11 +10,8 @@ import com.retail.business.CarBusinessImpl;
 import com.retail.business.CarBusiness;
 import com.retail.services.CarServiceImpl;
 import com.retail.services.CarService;
-import com.retail.shop.car.constants.FuelTypeEnum;
-import com.retail.shop.car.constants.GearBoxEnum;
 import com.retail.shop.car.dto.CarDto;
 import com.retail.shop.car.model.Car;
-import com.retail.shop.car.model.CarDetails;
 import com.retail.shop.car.repository.CarRepository;
 import com.retail.shop.car.repository.ICarRepository;
 
@@ -40,6 +37,7 @@ public class App
         {
             Scanner in = new Scanner(System.in);
             option = in.nextInt();
+            in.close();
         }
         catch(Exception e)
         {
@@ -54,7 +52,7 @@ public class App
                 CarBusiness carBusiness = new CarBusinessImpl();
                 List<CarDto> carsDto = carBusiness.computeCars(cars);
                 for (CarDto carDto : carsDto) {
-                   System.out.println(carDto.getName());
+                   System.out.println(carDto.toString());
                 }
                 break;
             default:

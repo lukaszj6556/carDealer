@@ -11,11 +11,19 @@ public class CarBusinessImpl implements CarBusiness {
     public List<CarDto> computeCars(List<Car> cars)
     {
         List<CarDto> carsDto = new ArrayList<CarDto>();
+        double hpToKw = 0.74;
 
         for (Car car : cars) {
             CarDto carDto = new CarDto();
             carDto.setName(car.getBrand() + " " + car.getModel());
-            carDto.setEngine("HorsePower: " + car.getCarDetails().getHorsePower() + " Engine capactiy:" +car.getCarDetails().getEngineCapacity());
+            carDto.setEngine(car.getCarDetails().getHorsePower() * hpToKw);
+            carDto.setCarKilometres(car.getCarKilometres());
+            carDto.setColor(car.getCarDetails().getColor());
+            carDto.setFuelType(car.getCarDetails().getFuelType());
+            carDto.setGearbox(car.getCarDetails().getGearbox());
+            carDto.setPrice(car.getPrice());
+            carDto.setProductionYear(car.getProductionYear());
+            carDto.setVersion(car.getCarDetails().getVersion());
             carsDto.add(carDto);
         }
 
