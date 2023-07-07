@@ -13,11 +13,10 @@ import com.retail.shop.car.model.Car;
 
 public class CarBusinessImpl implements CarBusiness {
     @Override
-    public List<CarDto> computeCars(List<Car> cars)
-    {
+    public List<CarDto> computeCars(List<Car> cars) {
         List<CarDto> carsDto = new ArrayList<CarDto>();
         ModelMapper modelMapper = getMapper();
-          
+
         for (Car car : cars) {
             CarDto carDto = modelMapper.map(car, CarDto.class);
             carsDto.add(carDto);
@@ -26,8 +25,7 @@ public class CarBusinessImpl implements CarBusiness {
         return carsDto;
     }
 
-    private ModelMapper getMapper()
-    {
+    private ModelMapper getMapper() {
         Converter<String, String> converter = new Converter<String, String>() {
             public String convert(MappingContext<String, String> context) {
                 Car car = (Car) context.getParent().getSource();
@@ -36,24 +34,24 @@ public class CarBusinessImpl implements CarBusiness {
 
                 return car.getBrand() + car.getModel();
             }
-          };
+        };
 
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.addConverter(converter);
         PropertyMap<Car, CarDto> carMap = new PropertyMap<Car, CarDto>() {
             protected void configure() {
-              map().setHorsePower(source.getCarDetails().getHorsePower());
-              map().setColor(source.getCarDetails().getColor());
-              map().setGearbox(source.getCarDetails().getGearbox());
-              map().setEngineCapacity(source.getCarDetails().getEngineCapacity());
-              map().setFuelType(source.getCarDetails().getFuelType());
-              map().setVersion(source.getCarDetails().getVersion());
-              map().setEngine(source.getCarDetails().getHorsePower() * 0.74);
+                map().setHorsePower(source.getCarDetails().getHorsePower());
+                map().setColor(source.getCarDetails().getColor());
+                map().setGearbox(source.getCarDetails().getGearbox());
+                map().setEngineCapacity(source.getCarDetails().getEngineCapacity());
+                map().setFuelType(source.getCarDetails().getFuelType());
+                map().setVersion(source.getCarDetails().getVersion());
+                map().setEngine(source.getCarDetails().getHorsePower() * 0.74);
             }
-          };
-          
-          modelMapper.addMappings(carMap);
+        };
 
-          return modelMapper;
+        modelMapper.addMappings(carMap);
+
+        return modelMapper;
     }
 }

@@ -11,34 +11,31 @@ import com.retail.shop.car.model.Car;
 import com.retail.shop.car.model.Dealer;
 
 public class Connection {
+    private static final String DATABASE_YAML = "database.yaml";
     ObjectMapper mapper;
     private String path = "maven project/buy-a-car/src/main/resources/";
-    private String filename = "database.yaml";
+    private String filename = DATABASE_YAML;
 
     public Connection() {
         mapper = new ObjectMapper(new YAMLFactory());
         mapper.findAndRegisterModules();
     }
 
-    public List<Car> getAllCars()
-    {
+    public List<Car> getAllCars() {
         List<Car> cars = new ArrayList<>();
-        try
-        {
-            return mapper.readValue(ClassLoader.getSystemResourceAsStream("database.yaml"), Dealer.class).getCars();
-        }
-        catch(IOException ex)
-        {
-            System.out.println("Problem with accessing files with data. Check if file database.yaml exists in folder resources." + ex.getMessage());
+        try {
+            return mapper.readValue(ClassLoader.getSystemResourceAsStream(DATABASE_YAML), Dealer.class).getCars();
+        } catch (IOException ex) {
+            System.out.println(
+                    "Problem with accessing files with data. Check if file database.yaml exists in folder resources."
+                            + ex.getMessage());
         }
 
         return cars;
     }
 
-    public void addCar(Car car)
-    {
-        try
-        {
+    public void addCar(Car car) {
+        try {
             Dealer dealer = getDealer();
             List<Car> cars = dealer.getCars();
             int index = cars.stream().mapToInt(x -> x.getId()).max().getAsInt();
@@ -47,23 +44,20 @@ public class Connection {
             dealer.setCars(cars);
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             mapper.writeValue(new File(path, filename), dealer);
-        }
-        catch(Exception e)
-        {
-            System.out.println("Problem with accessing files with data. Check if file database.yaml exists in folder resources." + e.getMessage());
+        } catch (Exception e) {
+            System.out.println(
+                    "Problem with accessing files with data. Check if file database.yaml exists in folder resources."
+                            + e.getMessage());
         }
     }
 
-    public Car getCarById(int id)
-    {
+    public Car getCarById(int id) {
         List<Car> cars = getAllCars();
         return cars.stream().filter(car -> car.getId() == id).findAny().get();
     }
 
-    public void removeCar(int id)
-    {
-        try
-        {
+    public void removeCar(int id) {
+        try {
             Dealer dealer = getDealer();
             List<Car> cars = dealer.getCars();
             Car car = cars.stream().filter(x -> x.getId() == id).findAny().get();
@@ -71,23 +65,21 @@ public class Connection {
             dealer.setCars(cars);
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             mapper.writeValue(new File(path, filename), dealer);
-        }
-        catch(Exception e)
-        {
-            System.out.println("Problem with accessing files with data. Check if file database.yaml exists in folder resources." + e.getMessage());
+        } catch (Exception e) {
+            System.out.println(
+                    "Problem with accessing files with data. Check if file database.yaml exists in folder resources."
+                            + e.getMessage());
         }
     }
 
-    private Dealer getDealer()
-    {
+    private Dealer getDealer() {
         Dealer dealer = new Dealer();
-        try
-        {
-            return mapper.readValue(ClassLoader.getSystemResourceAsStream("database.yaml"), Dealer.class);
-        }
-        catch(IOException ex)
-        {
-            System.out.println("Problem with accessing files with data. Check if file database.yaml exists in folder resources." + ex.getMessage());
+        try {
+            return mapper.readValue(ClassLoader.getSystemResourceAsStream(DATABASE_YAML), Dealer.class);
+        } catch (IOException ex) {
+            System.out.println(
+                    "Problem with accessing files with data. Check if file database.yaml exists in folder resources."
+                            + ex.getMessage());
         }
 
         return dealer;

@@ -1,5 +1,5 @@
 package com.retail.shop.car.model;
-    
+
 public class Car {
     private int id;
     private String brand;
@@ -8,6 +8,18 @@ public class Car {
     private long carKilometres;
     private double price;
     private CarDetails carDetails;
+
+    public Car() {
+    }
+
+    public Car(int id, String brand, String model, int productionYear, long carKilometres, double price) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.productionYear = productionYear;
+        this.carKilometres = carKilometres;
+        this.price = price;
+    }
 
     public int getId() {
         return id;
@@ -20,7 +32,7 @@ public class Car {
     public String getBrand() {
         return brand;
     }
-    
+
     public void setBrand(String brand) {
         this.brand = brand;
     }
@@ -28,11 +40,11 @@ public class Car {
     public String getModel() {
         return model;
     }
-    
+
     public void setModel(String model) {
         this.model = model;
     }
-    
+
     public int getProductionYear() {
         return productionYear;
     }

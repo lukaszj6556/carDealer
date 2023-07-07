@@ -1,0 +1,13 @@
+{
+    "sonarlint.connectedMode.project": {
+        "projectKey": "SampleAngularApp"
+    },
+    "sonarlint.ls.javaHome": "C:\\Program Files\\Java\\jre1.8.0_291",
+    "sonarlint.connectedMode.connections.sonarqube": [
+        {   
+            "serverUrl": "http://sonarqubece.abcd.com:443",
+            "token": "51df88dd4ea115f9f6afd7a5f457859b1d24b9f2"
+        }
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
