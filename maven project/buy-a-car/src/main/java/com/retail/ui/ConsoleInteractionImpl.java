@@ -1,16 +1,21 @@
 package com.retail.ui;
 
 import java.io.PrintStream;
-import java.util.Scanner;
+
+import com.retail.ui.ScannerWrapperInterface;
 
 public class ConsoleInteractionImpl implements ConsoleInteraction {
     private static final PrintStream OUT = System.out;
-    static Scanner scanner = new Scanner(System.in);
+    ScannerWrapperInterface wrapper;
+
+    public ConsoleInteractionImpl(ScannerWrapperInterface wrapper) {
+        this.wrapper = wrapper;
+    }
 
     public String readString(String text) {
         String s = "";
         OUT.println(text);
-        s = scanner.next();
+        s = wrapper.readString();
 
         return s;
     }
@@ -19,7 +24,7 @@ public class ConsoleInteractionImpl implements ConsoleInteraction {
         int number = 0;
         OUT.println(text);
         try {
-            number = scanner.nextInt();
+            number = wrapper.readInt();
         } catch (Exception e) {
             OUT.println("What you have provided is not a number. Please try again.");
             readNumber(text);
@@ -32,7 +37,7 @@ public class ConsoleInteractionImpl implements ConsoleInteraction {
         float number = 0;
         OUT.println(text);
         try {
-            number = scanner.nextFloat();
+            number = wrapper.readFloat();
         } catch (Exception e) {
             OUT.println("What you have provided is not a number. Please try again.");
             readNumber(text);

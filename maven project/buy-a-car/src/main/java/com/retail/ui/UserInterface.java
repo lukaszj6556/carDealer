@@ -70,7 +70,7 @@ public class UserInterface {
         int option = consoleInteraction.readNumber("Please provide how the cars should be sorted.");
         switch (option) {
             case 1:
-                return cars.stream().sorted((x, y) -> x.getName().compareTo(y.getName())).map(x -> x.getName())
+                return cars.stream().sorted((x, y) -> x.getName().compareTo(y.getName())).map(CarDto::getName)
                         .collect(Collectors.toList());
             case 2:
                 cars.sort((x, y) -> Double.compare(x.getPrice(), y.getPrice()));
@@ -79,7 +79,7 @@ public class UserInterface {
                 cars.sort((x, y) -> Double.compare(x.getProductionYear(), y.getProductionYear()));
                 return cars.stream().map(x -> x.getName() + " " + x.getProductionYear()).collect(Collectors.toList());
             default:
-                return cars.stream().map(x -> x.getName()).collect(Collectors.toList());
+                return cars.stream().map(CarDto::getName).collect(Collectors.toList());
         }
     }
 

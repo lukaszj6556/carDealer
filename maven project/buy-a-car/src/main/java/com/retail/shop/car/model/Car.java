@@ -83,4 +83,8 @@ public class Car {
                 + carKilometres + ", price=" + price + ", carDetails=" + carDetails.toString() + "]";
     }
 
+    public String getName() {
+        return this.getBrand() + " " + this.getModel();
+    }
+
 }

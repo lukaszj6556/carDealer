@@ -7,7 +7,7 @@ public class CarDetails {
     private int horsePower;
     private String color;
     private GearBoxEnum gearbox;
-    private double engineCapacity;
+    private float engineCapacity;
     private String version;
     private FuelTypeEnum fuelType;
 
@@ -35,11 +35,11 @@ public class CarDetails {
         this.gearbox = gearbox;
     }
 
-    public double getEngineCapacity() {
+    public float getEngineCapacity() {
         return engineCapacity;
     }
 
-    public void setEngineCapacity(double engineCapacity) {
+    public void setEngineCapacity(float engineCapacity) {
         this.engineCapacity = engineCapacity;
     }
 
@@ -68,5 +68,9 @@ public class CarDetails {
         + engineCapacity + ", Version=" 
         + version + ", FuelType=" 
         + fuelType + "]";
+    }
+
+    public double getkWh() {
+        return this.horsePower * 0.74;
     }
 }

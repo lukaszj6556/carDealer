@@ -3,62 +3,62 @@ package com.retail.ui;
 import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.when;
 
-import java.util.Scanner;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+// import org.powermock.api.mockito.PowerMockito;
+// import org.powermock.core.classloader.annotations.PrepareForTest;
+// import org.powermock.modules.junit4.PowerMockRunner;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ Scanner.class })
+import com.retail.ui.ScannerWrapperInterface;
+
+// @RunWith(PowerMockRunner.class)
+// @PrepareForTest({ ScannerWrapper.class })
 public class ConsoleInteractionImplTest {
-
-    @Before
-    public void Setup() {
-
-    }
 
     @Test
     public void testReadStringPositive() throws Exception {
         // given
-        Scanner scannerMock = Mockito.mock(Scanner.class);
-        when(scannerMock.next()).thenReturn("some string");
-        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl();
-        PowerMockito.whenNew(Scanner.class).withNoArguments().thenReturn(scannerMock);
+        ScannerWrapperInterface scannerMock = Mockito.mock(ScannerWrapperInterface.class);
+        // PowerMockito.whenNew(ScannerWrapper.class).withAnyArguments().thenReturn(scannerMock);
+        when(scannerMock.readString()).thenReturn("some string");
+        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl(scannerMock);
 
         // when
-        String readString = consoleInteractionImpl.readString("Some text");
+        String readString = consoleInteractionImpl.readString("testReadStringPositive");
         // then
-        Assert.assertTrue(readString == notNull());
+        Assert.assertNotNull(readString);
     }
 
     /**
      * @throws Exception
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void readStringNegative() throws Exception {
         // given
-        Scanner scannerMock = Mockito.mock(Scanner.class);
-        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl();
-        PowerMockito.whenNew(Scanner.class).withNoArguments().thenReturn(scannerMock);
+        ScannerWrapperInterface scannerMock = Mockito.mock(ScannerWrapperInterface.class);
+        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl(scannerMock);
+        // PowerMockito.whenNew(ScannerWrapper.class).withAnyArguments().thenReturn(scannerMock);
 
         // when
         String readString = consoleInteractionImpl.readString("Some text");
         // then
+        Assert.assertTrue(readString == null);
     }
 
     @Test
     public void readNumberPositive() throws Exception {
         // given
-        Scanner scannerMock = Mockito.mock(Scanner.class);
-        when(scannerMock.nextInt()).thenReturn(23);
-        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl();
-        PowerMockito.whenNew(Scanner.class).withNoArguments().thenReturn(scannerMock);
+        ScannerWrapperInterface scannerMock = Mockito.mock(ScannerWrapperInterface.class);
+        when(scannerMock.readInt()).thenReturn(23);
+        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl(scannerMock);
+        // PowerMockito.whenNew(ScannerWrapper.class).withNoArguments().thenReturn(scannerMock);
 
         // when
         int readNumber = consoleInteractionImpl.readNumber("Some text");
@@ -69,44 +69,47 @@ public class ConsoleInteractionImplTest {
     /**
      * @throws Exception
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void readNumberNegative() throws Exception {
         // given
-        Scanner scannerMock = Mockito.mock(Scanner.class);
-        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl();
-        PowerMockito.whenNew(Scanner.class).withNoArguments().thenReturn(scannerMock);
+        ScannerWrapperInterface scannerMock = Mockito.mock(ScannerWrapperInterface.class);
+        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl(scannerMock);
+        // PowerMockito.whenNew(ScannerWrapper.class).withNoArguments().thenReturn(scannerMock);
 
         // when
-        String readString = consoleInteractionImpl.readString("Some text");
+        int readNumber = consoleInteractionImpl.readNumber("Some text");
+        // then
+        Assert.assertEquals(readNumber, 0);
     }
 
     @Test
     public void readFloatPositive() throws Exception {
         // given
-        Scanner scannerMock = Mockito.mock(Scanner.class);
-        when(scannerMock.nextFloat()).thenReturn(2.5f);
-        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl();
-        PowerMockito.whenNew(Scanner.class).withNoArguments().thenReturn(scannerMock);
+        ScannerWrapperInterface scannerMock = Mockito.mock(ScannerWrapperInterface.class);
+        when(scannerMock.readFloat()).thenReturn(2.5f);
+        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl(scannerMock);
+        // PowerMockito.whenNew(ScannerWrapper.class).withNoArguments().thenReturn(scannerMock);
 
         // when
         float readFloat = consoleInteractionImpl.readFloatNumber("Some text");
         // then
-        Assert.assertNotEquals(readFloat, 0);
+        Assert.assertEquals(readFloat, 2.5f, 0.0f);
     }
 
     /**
      * @throws Exception
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void readFloatNegative() throws Exception {
         // given
-        Scanner scannerMock = Mockito.mock(Scanner.class);
-        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl();
-        PowerMockito.whenNew(Scanner.class).withNoArguments().thenReturn(scannerMock);
+        ScannerWrapperInterface scannerMock = Mockito.mock(ScannerWrapperInterface.class);
+        ConsoleInteractionImpl consoleInteractionImpl = new ConsoleInteractionImpl(scannerMock);
+        // PowerMockito.whenNew(ScannerWrapper.class).withNoArguments().thenReturn(scannerMock);
 
         // when
-        String readString = consoleInteractionImpl.readString("Some text");
+        float readFloat = consoleInteractionImpl.readFloatNumber("Some text");
         // then
+        Assert.assertEquals(readFloat, 0.0f, 0.0f);
     }
 
 }

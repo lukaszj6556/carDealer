@@ -9,5 +9,5 @@
             "token": "51df88dd4ea115f9f6afd7a5f457859b1d24b9f2"
         }
     ],
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

@@ -12,13 +12,17 @@ import com.retail.shop.car.model.Dealer;
 
 public class Connection {
     private static final String DATABASE_YAML = "database.yaml";
+    MapperFactory mapperFactory;
     ObjectMapper mapper;
     private String path = "maven project/buy-a-car/src/main/resources/";
     private String filename = DATABASE_YAML;
 
-    public Connection() {
-        mapper = new ObjectMapper(new YAMLFactory());
-        mapper.findAndRegisterModules();
+    public Connection(MapperFactory mapperFactory) {
+        setMapperFactory(mapperFactory);
+    }
+
+    public void setMapperFactory(MapperFactory mapperFactory) {
+        this.mapperFactory = mapperFactory;
     }
 
     public List<Car> getAllCars() {
@@ -75,7 +79,8 @@ public class Connection {
     private Dealer getDealer() {
         Dealer dealer = new Dealer();
         try {
-            return mapper.readValue(ClassLoader.getSystemResourceAsStream(DATABASE_YAML), Dealer.class);
+            Dealer del = mapper.readValue(ClassLoader.getSystemResourceAsStream(DATABASE_YAML), Dealer.class);
+            return del;
         } catch (IOException ex) {
             System.out.println(
                     "Problem with accessing files with data. Check if file database.yaml exists in folder resources."

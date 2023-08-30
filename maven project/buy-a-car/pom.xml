@@ -34,12 +34,12 @@
     <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
-<dependency>
+<!-- <dependency>
     <groupId>org.junit.jupiter</groupId>
     <artifactId>junit-jupiter</artifactId>
     <version>5.9.1</version>
     <scope>test</scope>
-</dependency>
+</dependency> -->
 <dependency>
     <groupId>junit</groupId>
     <artifactId>junit</artifactId>
@@ -64,7 +64,7 @@
 </dependency>
 <dependency>
     <groupId>org.powermock</groupId>
-    <artifactId>powermock-api-mockito</artifactId>
+    <artifactId>powermock-api-mockito2</artifactId>
     <version>1.7.0</version>
     <scope>test</scope>
 </dependency>

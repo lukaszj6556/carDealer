@@ -3,10 +3,12 @@ package com.retail.shop.car.repository;
 import java.util.List;
 
 import com.retail.dbConnection.Connection;
+import com.retail.dbConnection.MapperFactory;
 import com.retail.shop.car.model.Car;
 
 public class CarRepositoryImpl implements CarRepository{
-    private Connection connection = new Connection();
+    private MapperFactory mapperFactory = new MapperFactory();
+    private Connection connection = new Connection(mapperFactory);
 
     @Override
     public List<Car> getAllCars()

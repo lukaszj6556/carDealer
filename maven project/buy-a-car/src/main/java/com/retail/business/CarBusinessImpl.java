@@ -16,28 +16,20 @@ public class CarBusinessImpl implements CarBusiness {
     public List<CarDto> computeCars(List<Car> cars) {
         List<CarDto> carsDto = new ArrayList<CarDto>();
         ModelMapper modelMapper = getMapper();
-
         for (Car car : cars) {
+            System.out.println(car.toString());
+            System.out.println("****");
             CarDto carDto = modelMapper.map(car, CarDto.class);
             carsDto.add(carDto);
+            System.out.println(carDto.toString());
+
         }
 
         return carsDto;
     }
 
     private ModelMapper getMapper() {
-        Converter<String, String> converter = new Converter<String, String>() {
-            public String convert(MappingContext<String, String> context) {
-                Car car = (Car) context.getParent().getSource();
-                CarDto carDto = (CarDto) context.getParent().getDestination();
-                carDto.setName(car.getBrand() + " " + car.getModel());
-
-                return car.getBrand() + car.getModel();
-            }
-        };
-
         ModelMapper modelMapper = new ModelMapper();
-        modelMapper.addConverter(converter);
         PropertyMap<Car, CarDto> carMap = new PropertyMap<Car, CarDto>() {
             protected void configure() {
                 map().setHorsePower(source.getCarDetails().getHorsePower());
@@ -46,7 +38,8 @@ public class CarBusinessImpl implements CarBusiness {
                 map().setEngineCapacity(source.getCarDetails().getEngineCapacity());
                 map().setFuelType(source.getCarDetails().getFuelType());
                 map().setVersion(source.getCarDetails().getVersion());
-                map().setEngine(source.getCarDetails().getHorsePower() * 0.74);
+                map().setEngine(source.getCarDetails().getkWh());
+                map().setName(source.getName());
             }
         };
 
